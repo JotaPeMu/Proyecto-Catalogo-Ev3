@@ -1,0 +1,9 @@
+# Ignorar dependencias pesadas de Node.js
+node_modules/
+
+# Ignorar variables de entorno con contraseñas locales
+.env
+
+# Ignorar archivos temporales del sistema
+.DS_Store
+Thumbs.db
