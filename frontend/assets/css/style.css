@@ -78,6 +78,31 @@ main {
     border-bottom: 2px solid #0dcaf0;
     padding: clamp(1.5rem, 3vw, 3rem) 1rem; /* Se ajusta según el ancho de pantalla */
 }
+<<<<<<< HEAD
+=======
+/* Banner superior fluido para las páginas internas */
+.hero-header {
+    background: linear-gradient(180deg, #1b232a 0%, #121212 100%);
+    border-bottom: 1px solid rgba(13, 202, 240, 0.2);
+    padding: clamp(1.5rem, 3vw, 2.5rem) 1rem;                    /* Escala según el tamaño de pantalla */
+}
+
+.hero-header h1 {
+    font-size: clamp(1.6rem, 3.2vw, 2.8rem);                     /* Título fluido idéntico al inicio */
+}
+
+.hero-header .lead {
+    font-size: clamp(0.95rem, 1.4vw, 1.25rem);                   /* Subtitulo fluido */
+}
+
+footer{
+    background-color: #0a0a0a;
+    border-top: 2px solid #0dcaf0;
+    color: #b3b3b3;
+    padding: clamp(1.25, 2.5vw, 2rem) 1rem;                      /* Relleno vertical adaptable */
+    margin-top: 3rem;
+}
+>>>>>>> 70eb0cca0e0ed546a9560b70ecf33191aa754293
 
 /* Título principal fluido */
 .header-video-container h1 {

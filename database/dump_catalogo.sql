@@ -1,8 +1,12 @@
 -- =========================================================
 -- RESPALDO DE BASE DE DATOS RELACIONAL (dump_catalogo.sql)
 -- Proyecto: Play The Game Store — Catálogo Digital Gamer
+<<<<<<< HEAD
 -- Motor: PostgreSQL 18.6
 -- Autor: José Muñoz León
+=======
+-- Motor: PostgreSQL 18.6 | Autor: José Muñoz León
+>>>>>>> 70eb0cca0e0ed546a9560b70ecf33191aa754293
 -- =========================================================
 
 \restrict ctk3Dq1yUtZhmiihxyDxvqMSlFI7ctStTWh8Jk9YX8pzAcepELmCZkdOUk5aEsD
@@ -107,7 +111,11 @@ COPY public.productos (producto_id, nombre, descripcion, precio, imagen_url, cat
 6	Game Of Thrones Winter Is Coming	Estrategia en tiempo real ambientada en Westeros.	14990.00	assets/img/got.jpg	3
 7	Neverness to Everness	Acción estilo anime con exploración urbana.	15990.00	assets/img/neverness.jpg	4
 8	Brawlhalla	Combates de plataformas 2D multijugador.	11990.00	assets/img/brawlhalla.jpg	5
+<<<<<<< HEAD
 9	Valorant	Shooter táctico 5v5 basado en personajes y precisión.	25990.00	assets/img/Valorant.jpg	1
+=======
+9	Valorant	Shooter táctico 5v5 basado en personajes y precisión.	25990.00	assets/img/valorant.jpg	1
+>>>>>>> 70eb0cca0e0ed546a9560b70ecf33191aa754293
 10	Genshin Impact	RPG de acción en mundo abierto con estética anime.	34990.00	assets/img/genshin.jpg	4
 11	Rocket League	Fútbol arcade de alta velocidad con vehículos.	17990.00	assets/img/rocket_league.jpg	5
 12	World of Tanks	Combate táctico multijugador de vehículos blindados.	24990.00	assets/img/world_of_tanks.jpg	3
