@@ -274,6 +274,18 @@ $('btn-limpiar').addEventListener('click', () => {
     filtrarYMostrar();
 });
 
+// Botón para limpiar los campos del formulario de Añadir Producto
+$('btn-limpiar-agregar').addEventListener('click', () => {
+    $('form-nuevo-juego').reset();
+    $('alerta-formulario').innerHTML = '';
+});
+
+// Botón para limpiar los campos del formulario de Eliminar Producto
+$('btn-limpiar-eliminar').addEventListener('click', () => {
+    $('form-eliminar-juego').reset();
+    $('alerta-eliminar').innerHTML = '';
+});
+
 // Ejecuta la carga inicial de categorías y productos apenas termina de cargar el HTML
 document.addEventListener('DOMContentLoaded', () => {
     cargarCategorias();
