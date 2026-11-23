@@ -1,19 +1,19 @@
---
--- PostgreSQL database dump
---
+-- =========================================================
+-- RESPALDO DE BASE DE DATOS RELACIONAL (dump_catalogo.sql)
+-- Proyecto: Play The Game Store — Catálogo Digital Gamer
+-- Motor: PostgreSQL 18.6 | Autor: José Muñoz León
+-- =========================================================
 
 \restrict ctk3Dq1yUtZhmiihxyDxvqMSlFI7ctStTWh8Jk9YX8pzAcepELmCZkdOUk5aEsD
 
--- Dumped from database version 18.6
--- Dumped by pg_dump version 18.6
-
--- Started on 2026-11-20 18:27:41
-
+-- ======================================================
+-- 1. CONFIGURACIÓN INICIAL DE LA SESIÓN DE RESTAURACIÓN
+-- ======================================================
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET transaction_timeout = 0;
-SET client_encoding = 'UTF8';
+SET client_encoding = 'UTF8';              -- Codificación UTF-8 para soportar tildes y caracteres en español
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
@@ -22,27 +22,19 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 SET default_tablespace = '';
-
 SET default_table_access_method = heap;
 
---
--- TOC entry 220 (class 1259 OID 16417)
--- Name: categorias; Type: TABLE; Schema: public; Owner: postgres
---
-
+-- =================================================================
+-- 2. CREACIÓN DE TABLA 'categorias' Y SU SECUENCIA AUTOINCREMENTAL
+-- =================================================================
 CREATE TABLE public.categorias (
-    categoria_id integer NOT NULL,
-    nombre character varying(80) NOT NULL
+    categoria_id integer NOT NULL,         -- Identificador único de la categoría (Llave Primaria)
+    nombre character varying(80) NOT NULL  -- Nombre descriptivo del rubro (ej. Shooter, Consolas)
 );
-
 
 ALTER TABLE public.categorias OWNER TO postgres;
 
---
--- TOC entry 219 (class 1259 OID 16416)
--- Name: categorias_categoria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
+-- Secuencia automática para generar IDs correlativos en 'categorias' (1, 2, 3...)
 CREATE SEQUENCE public.categorias_categoria_id_seq
     AS integer
     START WITH 1
@@ -51,40 +43,24 @@ CREATE SEQUENCE public.categorias_categoria_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER SEQUENCE public.categorias_categoria_id_seq OWNER TO postgres;
-
---
--- TOC entry 4923 (class 0 OID 0)
--- Dependencies: 219
--- Name: categorias_categoria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
 ALTER SEQUENCE public.categorias_categoria_id_seq OWNED BY public.categorias.categoria_id;
 
-
---
--- TOC entry 222 (class 1259 OID 16426)
--- Name: productos; Type: TABLE; Schema: public; Owner: postgres
---
-
+-- ================================================================
+-- 3. CREACIÓN DE TABLA 'productos' Y SU SECUENCIA AUTOINCREMENTAL
+-- ================================================================
 CREATE TABLE public.productos (
-    producto_id integer NOT NULL,
-    nombre character varying(120) NOT NULL,
-    descripcion text,
-    precio numeric(10,2) NOT NULL,
-    imagen_url text,
-    categoria_id integer NOT NULL
+    producto_id integer NOT NULL,          -- Identificador único del producto (Llave Primaria)
+    nombre character varying(120) NOT NULL,-- Título del videojuego, consola o periférico
+    descripcion text,                      -- Reseña o características técnicas del producto
+    precio numeric(10,2) NOT NULL,         -- Precio en pesos chilenos (CLP) con 2 decimales
+    imagen_url text,                       -- Ruta local (assets/img/...) o URL externa de la carátula
+    categoria_id integer NOT NULL          -- Llave Foránea que vincula el producto con su categoría
 );
-
 
 ALTER TABLE public.productos OWNER TO postgres;
 
---
--- TOC entry 221 (class 1259 OID 16425)
--- Name: productos_producto_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
+-- Secuencia automática para generar IDs correlativos en 'productos'
 CREATE SEQUENCE public.productos_producto_id_seq
     AS integer
     START WITH 1
@@ -93,40 +69,19 @@ CREATE SEQUENCE public.productos_producto_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER SEQUENCE public.productos_producto_id_seq OWNER TO postgres;
-
---
--- TOC entry 4924 (class 0 OID 0)
--- Dependencies: 221
--- Name: productos_producto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
 ALTER SEQUENCE public.productos_producto_id_seq OWNED BY public.productos.producto_id;
 
-
---
--- TOC entry 4760 (class 2604 OID 16420)
--- Name: categorias categoria_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
+-- =====================================================================
+-- 4. ASIGNACIÓN DE VALORES POR DEFECTO (AUTOINCREMENTO EN COLUMNAS ID)
+-- =====================================================================
 ALTER TABLE ONLY public.categorias ALTER COLUMN categoria_id SET DEFAULT nextval('public.categorias_categoria_id_seq'::regclass);
-
-
---
--- TOC entry 4761 (class 2604 OID 16429)
--- Name: productos producto_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.productos ALTER COLUMN producto_id SET DEFAULT nextval('public.productos_producto_id_seq'::regclass);
 
-
---
--- TOC entry 4915 (class 0 OID 16417)
--- Dependencies: 220
--- Data for Name: categorias; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+-- ===============================================================
+-- 5. INSERCIÓN DE DATOS INICIALES: 8 CATEGORÍAS DEL CATÁLOGO
+-- (No modificar los espacios/tabuladores dentro del bloque COPY)
+-- ===============================================================
 COPY public.categorias (categoria_id, nombre) FROM stdin;
 1	Shooter
 2	MMORPG
@@ -138,13 +93,10 @@ COPY public.categorias (categoria_id, nombre) FROM stdin;
 8	Suscripciones y Gift Cards
 \.
 
-
---
--- TOC entry 4917 (class 0 OID 16426)
--- Dependencies: 222
--- Data for Name: productos; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+-- ===============================================================
+-- 6. INSERCIÓN DE DATOS INICIALES: 28 PRODUCTOS REGISTRADOS
+-- (No modificar los espacios/tabuladores dentro del bloque COPY)
+-- ===============================================================
 COPY public.productos (producto_id, nombre, descripcion, precio, imagen_url, categoria_id) FROM stdin;
 1	Overwatch 2	Shooter táctico por equipos basado en héroes.	29990.00	assets/img/overwatch2.jpg	1
 2	PUBG: BATTLEGROUNDS	Battle royale de supervivencia en mapas abiertos.	19990.00	assets/img/pubg.jpg	1
@@ -176,57 +128,29 @@ COPY public.productos (producto_id, nombre, descripcion, precio, imagen_url, cat
 28	Gift Card Riot Games 4280 RP / VP	Código digital canjeable por Riot Points o Valorant Points para aspectos y pases de batalla.	32990.00	assets/img/riot-points-giftcard.jpg	8
 \.
 
-
---
--- TOC entry 4925 (class 0 OID 0)
--- Dependencies: 219
--- Name: categorias_categoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
+-- ========================================================================
+-- 7. SINCRONIZACIÓN DE SECUENCIAS (CONTADORES DE ID)
+-- Ajusta el contador al último ID cargado (8 y 28) para evitar colisiones
+-- ========================================================================
 SELECT pg_catalog.setval('public.categorias_categoria_id_seq', 8, true);
-
-
---
--- TOC entry 4926 (class 0 OID 0)
--- Dependencies: 221
--- Name: productos_producto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
 SELECT pg_catalog.setval('public.productos_producto_id_seq', 28, true);
 
-
---
--- TOC entry 4763 (class 2606 OID 16424)
--- Name: categorias categorias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
+-- ======================================================================
+-- 8. RESTRICCIONES DE INTEGRIDAD: LLAVES PRIMARIAS (PK) Y FORÁNEAS (FK)
+-- ======================================================================
+-- Llave Primaria de 'categorias'
 ALTER TABLE ONLY public.categorias
     ADD CONSTRAINT categorias_pkey PRIMARY KEY (categoria_id);
 
-
---
--- TOC entry 4765 (class 2606 OID 16437)
--- Name: productos productos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
+-- Llave Primaria de 'productos'
 ALTER TABLE ONLY public.productos
     ADD CONSTRAINT productos_pkey PRIMARY KEY (producto_id);
 
-
---
--- TOC entry 4766 (class 2606 OID 16438)
--- Name: productos fk_categoria; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
+-- Llave Foránea que relaciona cada producto con una categoría válida
 ALTER TABLE ONLY public.productos
     ADD CONSTRAINT fk_categoria FOREIGN KEY (categoria_id) REFERENCES public.categorias(categoria_id);
 
-
--- Completed on 2026-11-20 18:27:42
-
---
--- PostgreSQL database dump complete
---
-
+-- ==================================
+-- FIN DEL RESPALDO DE BASE DE DATOS
+-- ==================================
 \unrestrict ctk3Dq1yUtZhmiihxyDxvqMSlFI7ctStTWh8Jk9YX8pzAcepELmCZkdOUk5aEsD
-

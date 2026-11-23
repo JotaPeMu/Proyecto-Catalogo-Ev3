@@ -2,6 +2,12 @@
    1. ESTILOS GENERALES Y ESTRUCTURA DE PÁGINA
    ============================================ */
 
+/* Evita el rebote elástico en los 4 bordes sin bloquear el desplazamiento normal */
+html {
+    overscroll-behavior: none;                                  /* Bloquea el estiramiento en los 4 bordes sin trabar el scroll */
+    background-color: #121212;                                  /* Garantiza fondo oscuro debajo del video */
+}
+
 /* Configuración base de la página y estructura para mantener el pie de página abajo */
 body {
     background-color: #121212;                                  /* Color de fondo oscuro principal */
@@ -10,7 +16,9 @@ body {
     display: flex;                                              /* Activa caja flexible (Flexbox) */
     flex-direction: column;                                     /* Ordena los bloques de arriba hacia abajo */
     min-height: 100vh;                                          /* Fuerza a que mida al menos el 100% del alto de pantalla */
+    overflow-x: clip;                                           /* Recorta cualquier desborde lateral sin bloquear el scroll vertical ni sticky-top */
 }
+
 
 /* Empuja el footer hasta el final de la pantalla cuando hay poco contenido */
 main {
@@ -23,57 +31,57 @@ main {
 
 /* Fondo negro del menú superior con borde inferior cian neón */
 .navbar-custom {
-    background-color: #0a0a0a;                                  /* Negro profundo para contrastar con el fondo */
-    border-bottom: 2px solid #0dcaf0;                           /* Línea decorativa cian neón */
+    background-color: #0a0a0a;                                /* Negro profundo para contrastar con el fondo */
+    border-bottom: 2px solid #0dcaf0;                         /* Línea decorativa cian neón */
 }
 
 /* Estilo del nombre/logo de la tienda */
 .navbar-brand {
-    color: #0dcaf0 !important;                                  /* Texto cian brillante (sobrescribe Bootstrap) */
+    color: #0dcaf0 !important;                                /* Texto cian brillante (sobrescribe Bootstrap) */
     font-weight: 700;                                           /* Letra en negrita */
     letter-spacing: 0.5px;                                      /* Separación sutil entre letras */
 }
 
 /* Color base y transición suave para los enlaces del menú */
 .nav-link {
-    color: #e0e0e0 !important;                                  /* Gris casi blanco para enlaces inactivos */
+    color: #e0e0e0 !important;                                /* Gris casi blanco para enlaces inactivos */
     transition: color 0.2s ease;                                /* Cambio de color suave en 0.2 segundos */
 }
 
 /* Ilumina en cian el enlace activo o al pasar el mouse por encima */
 .nav-link:hover,
 .nav-link.active {
-    color: #0dcaf0 !important;                                  /* Resaltado en cian neón */
+    color: #0dcaf0 !important;                                /* Resaltado en cian neón */
     font-weight: 600;                                           /* Texto seminegrita para destacar la sección actual */
 }
 
 /* Borde y fondo cian translúcido para el botón de menú en celulares */
 .navbar-toggler {
-    border: 2px solid #0dcaf0 !important;                       /* Borde cian alrededor del botón móvil */
-    background-color: rgba(13, 202, 240, 0.25) !important;      /* Fondo cian semitransparente */
+    border: 2px solid #0dcaf0 !important;                              /* Borde cian alrededor del botón móvil */
+    background-color: rgba(13, 202, 240, 0.25) !important;             /* Fondo cian semitransparente */
 }
 
 /* Brillo exterior al presionar el botón del menú móvil */
 .navbar-toggler:focus {
-    box-shadow: 0 0 0 0.2rem rgba(13, 202, 240, 0.5) !important; /* Halo luminoso al enfocar el botón */
+    box-shadow: 0 0 0 0.2rem rgba(13, 202, 240, 0.5) !important;       /* Halo luminoso al enfocar el botón */
 }
 
 /* ===================================
-   3. ENCABEZADO HERO Y PIE DE PÁGINA
+   3. ENCABEZADO Y PIE DE PÁGINA
    =================================== */
 
 /* Banner superior con degradado oscuro para las páginas internas */
 .hero-header {
-    background: linear-gradient(180deg, #1b232a 0%, #121212 100%); /* Degradado vertical de gris azulado a negro */
-    border-bottom: 1px solid rgba(13, 202, 240, 0.2);           /* Línea divisoria sutil en cian */
-    padding: 3rem 0;                                            /* Espaciado interno arriba y abajo */
+    background: linear-gradient(180deg, #1b232a 0%, #121212 100%);       /* Degradado vertical de gris azulado a negro */
+    border-bottom: 1px solid rgba(13, 202, 240, 0.2);                      /* Línea divisoria sutil en cian */
+    padding: 3rem 0;                                                         /* Espaciado interno arriba y abajo */
 }
 
 /* Pie de página oscuro con línea superior cian */
 footer {
-    background-color: #0a0a0a;                                  /* Fondo negro sólido */
-    border-top: 2px solid #0dcaf0;                              /* Borde superior cian neón */
-    color: #b3b3b3;                                             /* Texto gris suave */
+    background-color: #0a0a0a;                                /* Fondo negro sólido */
+    border-top: 2px solid #0dcaf0;                            /* Borde superior cian neón */
+    color: #b3b3b3;                                           /* Texto gris suave */
     padding: 1.5rem 0;                                          /* Relleno vertical */
     margin-top: 3rem;                                           /* Separación respecto al contenido principal */
 }
@@ -85,18 +93,19 @@ footer {
 /* Estilo base para tarjetas de productos, formularios y cajas de información */
 .game-card,
 .custom-panel {
-    background-color: #212830;                                  /* Fondo gris oscuro azulado para tarjetas */
-    border: 1px solid rgba(255, 255, 255, 0.1);                 /* Borde blanco muy sutil */
+    background-color: #212830;                                /* Fondo gris oscuro azulado para tarjetas */
+    border: 1px solid rgba(255, 255, 255, 0.1);               /* Borde blanco muy sutil */
     border-radius: 10px;                                        /* Esquinas redondeadas */
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; /* Animación fluida */
+    
 }
 
 /* Efecto de elevación y brillo cian al pasar el cursor sobre tarjetas */
 .game-card:hover,
 .hover-card:hover {
     transform: translateY(-6px) scale(1.015);                   /* Eleva la tarjeta 6px y la agranda ligeramente */
-    border-color: #0dcaf0 !important;                           /* Ilumina el borde en cian */
-    box-shadow: 0 10px 25px rgba(13, 202, 240, 0.3);            /* Proyecta sombra luminosa cian */
+    border-color: #0dcaf0 !important;                         /* Ilumina el borde en cian */
+    box-shadow: 0 10px 25px rgba(13, 202, 240, 0.514) !important;            /* Proyecta sombra luminosa cian */
 }
 
 /* Muestra la carátula completa en su proporción original sin recortarla ni deformarla */
@@ -104,7 +113,7 @@ footer {
     height: 250px;                                              /* Mantiene todas las tarjetas alineadas a la misma altura */
     width: 100%;                                                /* Ocupa todo el ancho disponible del recuadro */
     object-fit: contain;                                        /* Ajusta la imagen completa adentro sin recortar bordes */
-    background-color: #161b22;                                  /* Fondo oscuro uniforme para los espacios laterales */
+    background-color: #161b22;                                /* Fondo oscuro uniforme para los espacios laterales */
     padding: 2px;                                               /* Deja un margen interno para que la foto no toque los bordes */
     border-radius: 9px 9px 0 0;                                 /* Redondea solo las esquinas superiores */
 }
@@ -116,7 +125,7 @@ footer {
 
 /* Etiquetas de los campos del formulario en tono claro para buen contraste */
 .form-label {
-    color: #e2e8f0 !important;                                  /* Blanco hueso para fácil lectura */
+    color: #e2e8f0 !important;                                /* Blanco hueso para fácil lectura */
     font-weight: 500;                                           /* Grosor medio */
 }
 
@@ -150,8 +159,8 @@ footer {
 .header-video-container {
     position: relative;                                         /* Permite posicionar el video y textos adentro */
     overflow: hidden;                                           /* Oculta cualquier parte del video que sobresalga */
-    background-color: #0a0a0a;                                  /* Fondo negro mientras carga el video */
-    border-bottom: 2px solid #0dcaf0;                           /* Borde inferior cian */
+    background-color: #0a0a0a;                                /* Fondo negro mientras carga el video */
+    border-bottom: 2px solid #0dcaf0;                         /* Borde inferior cian */
     padding: 4rem 0;                                            /* Altura del banner principal */
 }
 
@@ -187,16 +196,16 @@ footer {
 
 /* Hace transparente el fondo del body para dejar ver el video completo */
 body.has-full-video {
-background-color: transparent !important;                   /* Quita el fondo negro sólido */
+background-color: transparent !important;                       /* Quita el fondo negro sólido */
 }
 /* Efecto vidrio esmerilado suave para el encabezado y footer sobre video */
 body.has-full-video .hero-header,
 body.has-full-video footer {
-background: rgba(10, 10, 10, 0.45);                         /* Negro semitransparente (45% opacidad) */
-backdrop-filter: blur(3px);                                 /* Desenfoque suave del video detrás */
+background: rgba(10, 10, 10, 0.45);                          /* Negro semitransparente (45% opacidad) */
+backdrop-filter: blur(3px);                                    /* Desenfoque suave del video detrás */
 }
 /* Efecto vidrio esmerilado más marcado para los paneles y formularios */
 body.has-full-video .custom-panel {
 background-color: rgba(24, 29, 35, 0.85);                   /* Fondo oscuro translúcido (85% opacidad) */
-backdrop-filter: blur(8px);                                 /* Efecto cristal esmerilado (glassmorphism) */
+backdrop-filter: blur(8px);                                   /* Efecto cristal esmerilado (glassmorphism) */
 }

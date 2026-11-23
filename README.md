@@ -51,11 +51,13 @@ Proyecto_Catalogo_EV3/
 2. Abrir el **Query Tool** sobre `catalogo_juegos_db`, cargar el archivo `database/dump_catalogo.sql` y ejecutarlo (`F5`) para crear las tablas y poblar los registros iniciales.
 
 ### 2. Configurar y Levantar el Servidor Backend
-1. Abrir una terminal en la carpeta `backend/`:
+1. Abrir una terminal en la carpeta `backend/` e instalar las dependencias:
    ```bash
    cd backend
-   npm.cdm install
+   npm install
    ```
+   *(Nota para Windows PowerShell: Si la política de ejecución bloquea `npm`, ejecutar `npm.cmd install` o abrir la terminal en modo Command Prompt / CMD).*
+
 2. Crear un archivo `.env` dentro de `backend/` tomando como referencia `.env.example` e ingresando las credenciales locales de PostgreSQL:
    ```env
    PORT=3000
@@ -64,6 +66,7 @@ Proyecto_Catalogo_EV3/
    DB_DATABASE=catalogo_juegos_db
    DB_USER=postgres
    DB_PASSWORD=tu_password_aqui
+   ADMIN_PASSWORD=tu_clave_admin_aqui
    ```
 3. Iniciar el servidor:
    ```bash

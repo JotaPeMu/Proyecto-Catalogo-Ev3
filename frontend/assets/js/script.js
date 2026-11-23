@@ -1,10 +1,14 @@
-// Rutas de la API del servidor backend
+// =======================================================
+// CONFIGURACIÓN GLOBAL Y VARIABLES DE ESTADO
+// =======================================================
+
+// Endpoints (rutas) de la API REST en nuestro servidor Express
 const API = { productos: '/api/productos', categorias: '/api/categorias' };
 
-// Lista en memoria donde se guardan todos los productos traídos de PostgreSQL
+// Arreglo en memoria que almacena todos los productos traídos de PostgreSQL para filtrar sin recargar
 let productos = [];
 
-// Atajo para seleccionar elementos del HTML por su ID sin repetir document.getElementById
+// Función auxiliar (atajo) para obtener elementos del DOM por su atributo 'id' sin repetir document.getElementById
 const $ = id => document.getElementById(id);
 
 // =======================================================
@@ -20,7 +24,7 @@ async function cargarCategorias() {
         $('filtro-categoria').innerHTML = '<option value="all">Todas las categorías</option>' +
             categorias.map(c => `<option value="${c.nombre}">${c.nombre}</option>`).join('');
 
-        // Llena el selector del formulario (usa el categoria_id para guardar la llave foránea en la BD)
+        // Llena el selector del formulario (usa la categoria_id para guardar la llave foránea en la BD)
         $('select-categoria-form').innerHTML = '<option value="">Selecciona una categoría...</option>' +
             categorias.map(c => `<option value="${c.categoria_id}">${c.nombre}</option>`).join('');
     } catch (error) {
@@ -44,14 +48,14 @@ async function cargarProductos() {
         productos = await res.json();
         $('estado-carga').innerHTML = '';
         
-        // Llena el selector del apartado de eliminación con los productos actuales
+        // Actualiza también el menú desplegable de "Eliminar Producto" con los registros vigentes
         $('select-eliminar-producto').innerHTML = '<option value="">Selecciona un producto...</option>' +
             productos.map(p => `<option value="${p.producto_id}">ID #${p.producto_id} — ${p.nombre}</option>`).join('');
 
-        // Dibuja las tarjetas en la pantalla
+        // Renderiza las tarjetas en la galería aplicando los filtros activos
         filtrarYMostrar();
     } catch {
-        // Si el servidor Node está apagado o falla la BD, muestra alerta roja
+        // Si el servidor Node está apagado o falla la conexión a PostgreSQL, muestra una alerta roja
         $('estado-carga').innerHTML = `<div class="alert alert-danger">Error de conexión con el servidor (localhost:3000).</div>`;
     }
 }
@@ -60,11 +64,11 @@ async function cargarProductos() {
 // 3. FILTRAR EN MEMORIA Y DIBUJAR LAS TARJETAS
 // =============================================
 function filtrarYMostrar() {
-    // Obtiene lo que el usuario escribió en el buscador y la categoría seleccionada
+    // Captura el texto escrito en el buscador (en minúsculas) y la categoría elegida
     const texto = $('filtro-nombre').value.trim().toLowerCase();
     const cat = $('filtro-categoria').value;
 
-    // Filtra la lista según el nombre y la categoría elegida
+    // Filtra el arreglo en memoria buscando coincidencias parciales de nombre y categoría exacta
     const filtrados = productos.filter(j =>
         j.nombre.toLowerCase().includes(texto) && (cat === 'all' || j.categoria === cat)
     );
@@ -74,7 +78,7 @@ function filtrarYMostrar() {
 
     // Si no hay coincidencias, muestra un mensaje informativo
     if (!filtrados.length) {
-        $('galeria-productos').innerHTML = `<p class="col-12 text-center text-secondary my-5 fs-5">No se encontraron videojuegos.</p>`;
+        $('galeria-productos').innerHTML = `<p class="col-12 text-center text-secondary my-5 fs-5">No se encontraron productos.</p>`;
         return;
     }
 
@@ -88,27 +92,27 @@ function filtrarYMostrar() {
 
         return `
         <article class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="card h-100 game-card text-white shadow-sm">
+            <div class="card h-100 game-card text-white">
                 <!-- Imagen del juego con respaldo automático si falla el enlace -->
                 <img src="${j.imagen_url}" onerror="this.onerror=null; this.src='${imgRespaldo}';" class="card-img-top" alt="${j.nombre}">
                 
+                <!-- card-body: envuelve TODO el contenido de texto para dar márgenes internos uniformes -->
                 <div class="card-body d-flex flex-column">
-    <!-- Título a ancho completo y descripción -->
-    <h3 class="h5 card-title fw-bold text-info mb-2">${j.nombre}</h3>
-    <p class="card-text small text-light opacity-75 mb-3">${j.descripcion}</p>
+                    <!-- Título a ancho completo y descripción -->
+                    <h3 class="h5 card-title fw-bold text-info mb-2">${j.nombre}</h3>
+                    <p class="card-text small text-light opacity-75 mb-3">${j.descripcion}</p>
 
-    <!-- Categoría alineada a la derecha justo arriba de la línea divisoria -->
-    <div class="mt-auto text-end mb-2">
-        <span class="badge bg-info text-dark">${j.categoria}</span>
-    </div>
-
-    <!-- Pie de la tarjeta: Precio e ID -->
-    <div class="pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
-        <span class="fw-bold">${precio}</span>
-        <small class="text-secondary">ID #${j.producto_id}</small>
-    </div>
-</div>
-
+                    <!-- Categoría alineada a la derecha justo arriba de la línea divisoria -->
+                    <div class="mt-auto text-end mb-2">
+                        <span class="badge bg-info text-dark">${j.categoria}</span>
+                    </div>
+                    
+                    <!-- Pie de la tarjeta: Precio e ID -->
+                    <div class="pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">${precio}</span>
+                        <small class="text-secondary">ID #${j.producto_id}</small>
+                    </div>
+                </div>
             </div>
         </article>`;
     }).join('');
@@ -127,13 +131,13 @@ function crearImagenRespaldo(titulo, categoria) {
     return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
 }
 
-// =================================================
-// 5. GUARDAR NUEVO PRODUCTO EN POSTGRESQL (POST)
-// =================================================
+// ==============================================================
+// 5. GUARDAR NUEVO PRODUCTO EN POSTGRESQL CON CONTRASEÑA (POST)
+// ==============================================================
 $('form-nuevo-juego').addEventListener('submit', async (e) => {
     e.preventDefault(); // Evita que la página se recargue al enviar el formulario
 
-    // Recopila los valores escritos por el usuario incluyendo la contraseña
+    // Recopila los valores escritos por el usuario incluyendo la contraseña de administrador
     const datos = {
         nombre: $('input-nombre').value,
         categoria_id: $('select-categoria-form').value,
@@ -153,11 +157,13 @@ $('form-nuevo-juego').addEventListener('submit', async (e) => {
 
         const data = await res.json();
 
-        // Si el servidor rechaza la petición (ej. contraseña incorrecta), muestra el aviso
+        // Si el backend devuelve error (ej. contraseña inválida o datos incompletos), muestra una alerta roja
         if (!res.ok) {
             $('alerta-formulario').innerHTML = `<div class="alert alert-danger py-2 mb-0">${data.error}</div>`;
+            setTimeout(() => $('alerta-formulario').innerHTML = '', 3000); // Desaparece tras 3 segundos
             return;
         }
+
 
         // Muestra alerta verde, limpia el formulario y recarga el catálogo
         $('alerta-formulario').innerHTML = `<div class="alert alert-success py-2 mb-0">¡Videojuego guardado en PostgreSQL!</div>`;
@@ -168,6 +174,7 @@ $('form-nuevo-juego').addEventListener('submit', async (e) => {
         setTimeout(() => $('alerta-formulario').innerHTML = '', 3000);
     } catch {
         $('alerta-formulario').innerHTML = `<div class="alert alert-danger py-2 mb-0">Error al guardar en el servidor.</div>`;
+        setTimeout(() => $('alerta-formulario').innerHTML = '', 3000); // Desaparece tras 3 segundos
     }
 });
 
@@ -175,14 +182,17 @@ $('form-nuevo-juego').addEventListener('submit', async (e) => {
 // 6. ELIMINAR PRODUCTO DE POSTGRESQL CON CONTRASEÑA
 // ==================================================
 $('form-eliminar-juego').addEventListener('submit', async (e) => {
-    e.preventDefault();
+    e.preventDefault();  // Evita que el formulario recargue la página al enviarse
+    
+    // Captura el ID del producto seleccionado y la contraseña ingresada
     const id = $('select-eliminar-producto').value;
     const password = $('input-password-eliminar').value;
 
+    // Detiene la ejecución si falta alguno de los dos datos obligatorios
     if (!id || !password) return;
 
     try {
-        // Envía la petición DELETE junto con la contraseña en el cuerpo (body)
+        // Envía una petición DELETE al endpoint específico del producto (/api/productos/:id)
         const res = await fetch(`${API.productos}/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
@@ -191,31 +201,36 @@ $('form-eliminar-juego').addEventListener('submit', async (e) => {
 
         const data = await res.json();
 
-        // Si el servidor responde error (ej. 401 contraseña incorrecta), muestra el mensaje
+        // Si el backend rechaza la operación (ej. 401 contraseña incorrecta), muestra una alerta roja
         if (!res.ok) {
             $('alerta-eliminar').innerHTML = `<div class="alert alert-danger py-2 mb-0">${data.error}</div>`;
+            setTimeout(() => $('alerta-eliminar').innerHTML = '', 3000); // Desaparece tras 3 segundos
             return;
         }
 
-        // Si la clave fue correcta, limpia el formulario y recarga el catálogo
+        // Si la clave fue correcta, muestra una alerta verde, vacía los campos y actualiza el catálogo desde PostgreSQL
         $('alerta-eliminar').innerHTML = `<div class="alert alert-success py-2 mb-0">Producto eliminado correctamente de PostgreSQL.</div>`;
         e.target.reset();
         await cargarProductos();
+        // Oculta la notificación de éxito automáticamente tras 3 segundos (3000 ms)
         setTimeout(() => $('alerta-eliminar').innerHTML = '', 3000);
-    } catch {
+        } catch {
+        // Si falla la red o el servidor Express no responde, muestra una alerta de error de conexión
         $('alerta-eliminar').innerHTML = `<div class="alert alert-danger py-2 mb-0">Error de conexión con el servidor.</div>`;
+        setTimeout(() => $('alerta-eliminar').innerHTML = '', 3000); // Desaparece tras 3 segundos
     }
+
 });
 
 // ==========================================
 // 7. EVENTOS DE FILTRADO Y ARRANQUE INICIAL
 // ==========================================
 
-// Filtra automáticamente cada vez que se escribe o se cambia la categoría
+// Ejecuta filtrarYMostrar() en tiempo real cada vez que el usuario escribe o cambia la categoría
 $('filtro-nombre').addEventListener('input', filtrarYMostrar);
 $('filtro-categoria').addEventListener('change', filtrarYMostrar);
 
-// Botón para vaciar los filtros y mostrar todos los productos nuevamente
+// Botón para restablecer los controles de búsqueda y vuelve a mostrar todos los productos registrados
 $('btn-limpiar').addEventListener('click', () => {
     $('filtro-nombre').value = '';
     $('filtro-categoria').value = 'all';
