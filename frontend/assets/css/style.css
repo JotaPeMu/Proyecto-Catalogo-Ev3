@@ -70,21 +70,38 @@ main {
    3. ENCABEZADO Y PIE DE PÁGINA
    =================================== */
 
-/* Banner superior con degradado oscuro para las páginas internas */
-.hero-header {
-    background: linear-gradient(180deg, #1b232a 0%, #121212 100%);       /* Degradado vertical de gris azulado a negro */
-    border-bottom: 1px solid rgba(13, 202, 240, 0.2);                      /* Línea divisoria sutil en cian */
-    padding: 3rem 0;                                                         /* Espaciado interno arriba y abajo */
+/* Banner principal adaptable a cualquier pantalla */
+.header-video-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #0a0a0a;
+    border-bottom: 2px solid #0dcaf0;
+    padding: clamp(1.5rem, 3vw, 3rem) 1rem; /* Se ajusta según el ancho de pantalla */
 }
 
-/* Pie de página oscuro con línea superior cian */
-footer {
-    background-color: #0a0a0a;                                /* Fondo negro sólido */
-    border-top: 2px solid #0dcaf0;                            /* Borde superior cian neón */
-    color: #b3b3b3;                                           /* Texto gris suave */
-    padding: 1.5rem 0;                                          /* Relleno vertical */
-    margin-top: 3rem;                                           /* Separación respecto al contenido principal */
+/* Título principal fluido */
+.header-video-container h1 {
+    font-size: clamp(1.6rem, 3.2vw, 2.8rem);
 }
+
+/* Subtítulo fluido */
+.header-video-container .lead {
+    font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+}
+
+/* Pie de página adaptable */
+.footer-video-container {
+    padding: clamp(1.5rem, 3vw, 2.5rem) 1rem;
+}
+
+/* Texto legal del footer fluido */
+.spec-copyright {
+    font-size: clamp(0.72rem, 0.9vw, 0.85rem);
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* ================================================
    4. TARJETAS DE PRODUCTOS Y PANELES CONTENEDORES
