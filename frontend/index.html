@@ -118,25 +118,27 @@
                             placeholder="https://...">
                     </div>
 
-                    <!-- Campo: Descripción corta del producto -->
-                    <div class="col-md-6">
+                    <!-- Fila 2: Descripción breve (8 cols) + Contraseña de admin (4 cols) = 12 columnas -->
+                    <div class="col-md-8">
                         <label for="input-descripcion" class="form-label">Descripción breve</label>
                         <input type="text" id="input-descripcion" class="form-control form-control-dark"
                             placeholder="Describe brevemente la temática del videojuego...">
                     </div>
 
-                    <!-- Campo: Clave de seguridad validada en el servidor -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="input-password-agregar" class="form-label">Contraseña de admin *</label>
                         <input type="password" id="input-password-agregar" class="form-control form-control-dark"
                             placeholder="Ingresa la clave..." required>
                     </div>
 
-                    <!-- Botón de envío: fondo transparente y borde cian que se rellena al pasar el mouse -->
-                    <div class="col-md-3 d-flex align-items-end">
-                        <button type="submit" class="btn btn-outline-info w-100 fw-bold">Guardar en PostgreSQL</button>
-                        <button type="button" id="btn-limpiar-agregar" class="btn btn-outline-secondary">Limpiar</button>
+                    <!-- Fila 3: Botones debajo de los campos, alineados a la izquierda con el mismo ancho que abajo -->
+                    <div class="col-12 col-lg-4 d-flex flex-wrap align-items-end gap-2">
+                        <button type="submit" class="btn btn-outline-info flex-grow-1 fw-bold">Guardar en
+                            PostgreSQL</button>
+                        <button type="button" id="btn-limpiar-agregar" class="btn btn-outline-info">Limpiar</button>
                     </div>
+
+
                 </form>
 
                 <!-- Contenedor donde JavaScript muestra mensajes de éxito o error al guardar -->
@@ -148,8 +150,9 @@
                 <!-- Sub-bloque A.2: Formulario para eliminar un registro existente en PostgreSQL -->
                 <h3 class="h6 text-danger mb-3">Eliminar Producto Existente</h3>
                 <form id="form-eliminar-juego" class="row g-3 align-items-end">
+                    <!-- Fila única en lg: 5 + 3 + 4 = 12 columnas exactas -->
                     <!-- Selector de productos actuales (llenado por script.js) -->
-                    <div class="col-md-5">
+                    <div class="col-md-6 col-lg-5">
                         <label for="select-eliminar-producto" class="form-label">Selecciona el producto *</label>
                         <select id="select-eliminar-producto" class="form-select form-select-dark" required>
                             <option value="">Cargando productos...</option>
@@ -163,10 +166,11 @@
                             placeholder="Ingresa la clave..." required>
                     </div>
 
-                    <!-- Botón de acción destructiva con borde rojo -->
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-outline-danger w-100 fw-bold">Eliminar de PostgreSQL</button>
-                        <button type="button" id="btn-limpiar-eliminar" class="btn btn-outline-secondary">Limpiar</button>
+                    <!-- Botones en rojo (btn-outline-danger) y responsivos sin desbordes -->
+                    <div class="col-12 col-lg-4 d-flex flex-wrap align-items-end gap-2">
+                        <button type="submit" class="btn btn-outline-danger flex-grow-1 fw-bold">Eliminar de
+                            PostgreSQL</button>
+                        <button type="button" id="btn-limpiar-eliminar" class="btn btn-outline-danger">Limpiar</button>
                     </div>
                 </form>
 
@@ -324,7 +328,7 @@
     <!-- 3. Script principal: conecta con la API REST, maneja eventos y dibuja las tarjetas -->
     <script src="assets/js/script.js"></script>
 
-    
+
 </body>
 
 </html>
