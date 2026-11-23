@@ -1,7 +1,7 @@
 # Play The Game Store — Catálogo Digital Gamer
 Aplicación web Full-Stack desarrollada para la **Evaluación Parcial N° 3 de Diseño y Desarrollo de Software** del **CFT Estatal Región de Valparaíso**.
 
-El sistema permite administrar un catálogo interactivo de videojuegos conectado en tiempo real a una base de datos relacional **PostgreSQL**, ofreciendo lectura mediante consultas relacionales (`INNER JOIN`), filtrado dinámico en pantalla y registro de nuevos títulos desde la interfaz web.
+El sistema permite administrar un catálogo interactivo de productos gamer conectado en tiempo real a una base de datos relacional **PostgreSQL**, ofreciendo lectura mediante consultas relacionales (`INNER JOIN`), filtrado dinámico en pantalla y registro de nuevos títulos desde la interfaz web.
 
 ---
 
