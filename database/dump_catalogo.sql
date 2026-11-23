@@ -1,5 +1,6 @@
 --
 -- PostgreSQL database dump
+-- Autor: José Muñoz León
 --
 
 \restrict ZJhFtNnFMWE56ujQLuANJrcOlaXd2MECdYFAaPe3nAzaPWVGti5iImba4afbnlM
