@@ -78,8 +78,7 @@ main {
     border-bottom: 2px solid #0dcaf0;
     padding: clamp(1.5rem, 3vw, 3rem) 1rem; /* Se ajusta según el ancho de pantalla */
 }
-<<<<<<< HEAD
-=======
+
 /* Banner superior fluido para las páginas internas */
 .hero-header {
     background: linear-gradient(180deg, #1b232a 0%, #121212 100%);
@@ -102,7 +101,6 @@ footer{
     padding: clamp(1.25, 2.5vw, 2rem) 1rem;                      /* Relleno vertical adaptable */
     margin-top: 3rem;
 }
->>>>>>> 70eb0cca0e0ed546a9560b70ecf33191aa754293
 
 /* Título principal fluido */
 .header-video-container h1 {

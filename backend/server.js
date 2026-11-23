@@ -32,9 +32,9 @@ const pool = new Pool({
     ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
 });
 
-// =====================================================================
+// ===============================================================
 // 1. OBTENER TODOS LOS PRODUCTOS CON SU CATEGORÍA (PETICIÓN GET)
-// =====================================================================
+// ===============================================================
 app.get('/api/productos', async (req, res) => {
     try {
         // Consulta SQL que cruza 'productos' y 'categorias' para obtener el nombre legible de la categoría
@@ -53,9 +53,9 @@ app.get('/api/productos', async (req, res) => {
     }
 });
 
-// =====================================================================
+// ===========================================================
 // 2. OBTENER TODAS LAS CATEGORÍAS DISPONIBLES (PETICIÓN GET)
-// =====================================================================
+// ===========================================================
 app.get('/api/categorias', async (req, res) => {
     try {
         // Consulta todas las categorías ordenadas alfabéticamente para llenar los selectores del HTML
@@ -67,9 +67,9 @@ app.get('/api/categorias', async (req, res) => {
     }
 });
 
-// =====================================================================
+// ================================================================
 // 3. GUARDAR UN NUEVO PRODUCTO EN LA BD (PETICIÓN POST PROTEGIDA)
-// =====================================================================
+// ================================================================
 app.post('/api/productos', async (req, res) => {
     // Extrae los datos enviados desde el formulario en el cuerpo de la petición
     const { nombre, descripcion, precio, imagen_url, categoria_id, password } = req.body;
@@ -108,9 +108,9 @@ app.post('/api/productos', async (req, res) => {
     }
 });
 
-// =====================================================================
+// ==============================================================
 // 4. ELIMINAR UN PRODUCTO EXISTENTE (PETICIÓN DELETE PROTEGIDA)
-// =====================================================================
+// ==============================================================
 app.delete('/api/productos/:id', async (req, res) => {
     const { id } = req.params;        // Obtiene el ID del producto desde la URL (/api/productos/5)
     const { password } = req.body;    // Obtiene la contraseña de administrador desde el cuerpo JSON
@@ -136,7 +136,7 @@ app.delete('/api/productos/:id', async (req, res) => {
     }
 });
 
-// =====================================================================
+// ======================================
 // ENCENDIDO Y ESCUCHA DEL SERVIDOR HTTP
-// =====================================================================
+// ======================================
 app.listen(PORT, () => console.log(`Servidor activo en http://localhost:${PORT}`));
