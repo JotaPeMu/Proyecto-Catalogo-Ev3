@@ -1,7 +1,8 @@
 -- =========================================================
 -- RESPALDO DE BASE DE DATOS RELACIONAL (dump_catalogo.sql)
 -- Proyecto: Play The Game Store — Catálogo Digital Gamer
--- Motor: PostgreSQL 18.6 | Autor: José Muñoz León
+-- Motor: PostgreSQL 18.6
+-- Autor: José Muñoz León
 -- =========================================================
 
 \restrict ctk3Dq1yUtZhmiihxyDxvqMSlFI7ctStTWh8Jk9YX8pzAcepELmCZkdOUk5aEsD
