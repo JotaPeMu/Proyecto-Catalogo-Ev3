@@ -270,7 +270,7 @@ $('orden-productos').addEventListener('change', filtrarYMostrar);
 $('btn-limpiar').addEventListener('click', () => {
     $('filtro-nombre').value = '';
     $('filtro-categoria').value = 'all';
-    $('order-productos').value = 'recientes';
+    $('orden-productos').value = 'recientes';
     filtrarYMostrar();
 });
 
