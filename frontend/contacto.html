@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<!-- data-bs-theme="dark": activa el tema oscuro nativo de Bootstrap 5 en toda la página -->
+<html lang="es" data-bs-theme="dark">
+
+<head>
+    <!-- Configuración básica de codificación de caracteres y vista adaptable (Responsive) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Play The Game Store</title>
+
+    <!-- Hojas de estilo: primero Bootstrap 5 y luego mis estilos personalizados para sobrescribir reglas -->
+    <!-- Bootstrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<!-- has-full-video: clase personalizada para ajustar el fondo de video a toda la pantalla -->
+<body class="has-full-video">
+
+    <!-- ===================================================================================
+         1. VIDEO DE FONDO A PANTALLA COMPLETA
+         autoplay + loop + muted + playsinline: reproducción automática continua sin sonido
+         =================================================================================== -->
+    <video autoplay loop muted playsinline class="page-video-bg">
+        <source src="assets/video/video.mp4" type="video/mp4">
+        Tu navegador no soporta videos de fondo.
+    </video>
+
+    <!-- ============================================================================
+         2. BARRA DE NAVEGACIÓN SUPERIOR (NAVBAR)
+         sticky-top: fija la barra en el borde superior al desplazarse por la página
+         ============================================================================ -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+<<<<<<< HEAD
+        <div class="container">
+=======
+        <div class="container-fluid px-3 px-md-4 px-lg-5">
+>>>>>>> 70eb0cca0e0ed546a9560b70ecf33191aa754293
+            <!-- Logotipo y nombre de la tienda con enlace al catálogo principal -->
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="assets/img/logo.png" alt="Logo Play The Game Store" width="34" height="34"
+                    class="rounded object-fit-contain">
+                <span>Play The Game Store</span>
+            </a>
+
+            <!-- Botón hamburguesa desplegable para pantallas móviles -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                aria-controls="menuPrincipal" aria-expanded="false" aria-label="Alternar navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Enlaces de navegación (con "Contacto" marcado como página activa) -->
+            <div class="collapse navbar-collapse" id="menuPrincipal">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio y Catálogo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Quiénes Somos</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page"
+                            href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         3. ENCABEZADO DE LA SECCIÓN (HERO HEADER)
+         ========================================== -->
+    <header class="hero-header text-center">
+<<<<<<< HEAD
+        <div class="container">
+=======
+        <div class="container-fluid px-3 px-md-4">
+>>>>>>> 70eb0cca0e0ed546a9560b70ecf33191aa754293
+            <h1 class="display-5 fw-bold text-white">Contáctanos</h1>
+            <p class="lead text-info mb-0">¿Tienes sugerencias de nuevos títulos o consultas técnicas? Escríbenos</p>
+        </div>
+    </header>
+
+    <!-- =====================================================================
+         4. CONTENIDO PRINCIPAL: FORMULARIO E INFORMACIÓN DE CONTACTO
+         ===================================================================== -->
+    <main class="container my-5">
+        <div class="row g-4">
+
+            <!-- -------------------------------------------------------------
+                 COLUMNA IZQUIERDA (7 de 12 columnas en desktop): FORMULARIO
+                 ------------------------------------------------------------- -->
+            <section class="col-lg-7" aria-labelledby="titulo-formulario-contacto">
+
+                <!-- custom-panel + h-100: tarjeta oscura que iguala su altura con la columna derecha -->
+                <div class="custom-panel p-4 h-100">
+                    <h2 id="titulo-formulario-contacto" class="h4 text-info mb-3">Envíanos un Mensaje</h2>
+
+                    <form id="form-contacto" class="row g-3">
+                        <!-- Campo: Nombre del usuario -->
+                        <div class="col-md-6">
+                            <label for="contacto-nombre" class="form-label">Nombre completo *</label>
+                            <input type="text" class="form-control form-control-dark" id="contacto-nombre"
+                                placeholder="Ej: José Muñoz León" required>
+                        </div>
+
+                        <!-- Campo: Correo electrónico con validación HTML5 de formato email -->
+                        <div class="col-md-6">
+                            <label for="contacto-correo" class="form-label">Correo electrónico *</label>
+                            <input type="email" class="form-control form-control-dark" id="contacto-correo"
+                                placeholder="nombre@correo.cl" required>
+                        </div>
+
+                        <!-- Campo: Desplegable con el motivo de contacto -->
+                        <div class="col-12">
+                            <label for="contacto-asunto" class="form-label">Motivo de consulta *</label>
+                            <select class="form-select form-select-dark" id="contacto-asunto" required>
+                                <option value="">Selecciona una opción...</option>
+                                <option value="sugerencia">Sugerir un producto para el catálogo</option>
+                                <option value="soporte">Reportar un error o falla técnica</option>
+                                <option value="consulta">Consulta general o académica</option>
+                            </select>
+                        </div>
+
+                        <!-- Campo: Área de texto multilínea para el mensaje -->
+                        <div class="col-12">
+                            <label for="contacto-mensaje" class="form-label">Mensaje *</label>
+                            <textarea class="form-control form-control-dark" id="contacto-mensaje" rows="4"
+                                placeholder="Escribe aquí tu consulta o sugerencia..." required></textarea>
+                        </div>
+
+                        <!-- Botón de envío: fondo transparente con borde cian que se ilumina al pasar el cursor -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-outline-info fw-bold px-4">Enviar Mensaje</button>
+                        </div>
+
+                        <!-- Contenedor donde JavaScript inyectará la alerta de confirmación -->
+                        <div class="col-12" id="alerta-contacto"></div>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- ---------------------------------------------------------------------
+                 COLUMNA DERECHA (5 de 12 columnas en desktop): DATOS INSTITUCIONALES
+                 --------------------------------------------------------------------- -->
+            <aside class="col-lg-5" aria-labelledby="titulo-info-contacto">
+
+                <!-- d-flex + flex-column + justify-content-between: empuja los canales oficiales al fondo -->
+                <div class="custom-panel p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <h2 id="titulo-info-contacto" class="h4 text-info mb-3">Información Institucional</h2>
+                        <ul class="list-unstyled text-light opacity-75">
+                            <li class="mb-3">
+                                <strong class="text-white d-block">📍 Dirección:</strong>Av. Valparaíso 1257, Quilpué,
+                                Región de Valparaíso, Chile.
+                            </li>
+                            <li class="mb-3">
+                                <strong class="text-white d-block">📞 Teléfono de Soporte:</strong>+56 32 250 1234
+                            </li>
+                            <li class="mb-3">
+                                <strong class="text-white d-block">✉️ Correo
+                                    Electrónico:</strong>contacto@playthegamestore.cl
+                            </li>
+                            <li class="mb-3">
+                                <strong class="text-white d-block">🕒 Horario de Atención:</strong>Lunes a Viernes de
+                                10:00 a 18:00 hrs. <br>Sábados de 10:00 a 14:00 hrs.</br>
+                            </li>
+                        </ul>
+                    </div>
+
+                                        <!-- Bloque inferior con enlaces interactivos a redes y canales oficiales -->
+                    <div class="pt-3 border-top border-secondary">
+                        <h3 class="h6 text-info mb-2">Canales Oficiales</h3>
+                        <div class="d-flex flex-wrap gap-2">
+                            <!-- target="_blank" abre cada enlace en una pestaña nueva; rel="noopener noreferrer" mejora la seguridad -->
+                            <a href="https://github.com/JotaPeMu" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline-info btn-sm">GitHub Oficial</a>
+                            <a href="https://discord.com/users/943305030528827402" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline-info btn-sm">Comunidad Discord</a>
+                            <a href="https://www.linkedin.com/in/jose-miguel-952289435/" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline-info btn-sm">LinkedIn</a>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- ===========================================================
+         5. PIE DE PÁGINA (FOOTER) CON CRÉDITOS Y DERECHOS DE AUTOR
+         =========================================================== -->
+<<<<<<< HEAD
+    <footer class="container-fluid text-center position-relative overflow-hidden">
+
+        <!-- Capa delantera (z-index 2): Contenido textual sobre el video de fondo -->
+        <div class="footer-content position-relative z-2 container">
+=======
+    <footer class="text-center">
+
+        <!-- Capa delantera (z-index 2): Contenido textual sobre el video de fondo -->
+        <div class="container-fluid px-3 px-md-4">
+>>>>>>> 70eb0cca0e0ed546a9560b70ecf33191aa754293
+            <p class="mb-1 small text-white fw-medium">Proyecto Digital Gamer</p>
+
+            <!-- Cláusula de Copyright institucional exigida por los términos de uso -->
+            <p class="mb-2 text-white-50 lh-sm spec-copyright">
+                &copy; 2026 Play The Game Store. Todos los derechos reservados.</p>
+
+            <!-- Créditos del desarrollador y stack tecnológico del proyecto -->
+            <p class="mb-1 text-white">Desarrollado por <strong class="text-info">José Muñoz León</strong></p>
+            <small class="text-light opacity-75">Arquitectura Full-Stack PostgreSQL + Express + Bootstrap 5</small>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+         6. SCRIPTS DE INTERACTIVIDAD Y VALIDACIÓN DEL FORMULARIO
+         ========================================================= -->
+    <!-- Bootstrap 5.3.9 JS: activa componentes dinámicos como el menú hamburguesa en celulares -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.min.js"
+        integrity="sha384-89aa4glufciPv46aKltztWQEmk+Tu9W2RhzXr6VcnUUEub7F8+06RcL2RYLCOHUq"
+        crossorigin="anonymous"></script>
+
+    <!-- Lógica local para simular el envío del formulario de contacto sin recargar la página -->
+    <script>
+        // Escucha el evento 'submit' cuando el usuario presiona el botón "Enviar Mensaje"
+        document.getElementById('form-contacto').addEventListener('submit', function (evento) {
+            // 1. Evita que el navegador recargue la página al enviar el formulario
+            evento.preventDefault();
+
+            // 2. Captura el nombre ingresado eliminando espacios innecesarios al inicio y al final
+            const nombre = document.getElementById('contacto-nombre').value.trim();
+
+            // 3. Selecciona el contenedor vacío donde se mostrará la notificación
+            const alerta = document.getElementById('alerta-contacto');
+
+            // 4. Inyecta una alerta verde de Bootstrap personalizada con el nombre del usuario
+            alerta.innerHTML = `
+                <div class="alert alert-success py-2 mb-0">
+                    ¡Gracias, <strong>${nombre}</strong>! Tu mensaje fue recibido correctamente. Te responderemos a la brevedad.
+                </div>
+            `;
+
+            // 5. Limpia automáticamente todos los campos del formulario
+            this.reset();
+
+            // 6. Programa un temporizador para borrar el mensaje de éxito tras 4.5 segundos (4500 ms)
+            setTimeout(() => { alerta.innerHTML = ''; }, 4500);
+        });
+    </script>
+</body>
+
+</html>

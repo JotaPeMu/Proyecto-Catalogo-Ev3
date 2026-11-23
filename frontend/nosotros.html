@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<!-- data-bs-theme="dark": activa el tema oscuro nativo de Bootstrap 5 en toda la página -->
+<html lang="es" data-bs-theme="dark">
+
+<head>
+    <!-- Configuración básica de codificación de caracteres y vista adaptable (Responsive) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiénes Somos | Play The Game Store</title>
+    
+    <!-- Hojas de estilo: primero Bootstrap 5 y luego mis estilos personalizados para sobrescribir reglas -->
+    <!-- Bootstrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<!-- has-full-video: clase personalizada para ajustar el fondo de video a toda la pantalla -->
+<body class="has-full-video">
+
+    <!-- ===================================================================================
+         1. VIDEO DE FONDO A PANTALLA COMPLETA
+         autoplay + loop + muted + playsinline: reproducción automática continua sin sonido
+         =================================================================================== -->
+    <video autoplay loop muted playsinline class="page-video-bg">
+        <source src="assets/video/video.mp4" type="video/mp4">
+        Tu navegador no soporta videos de fondo.
+    </video>
+
+    <!-- ============================================================================
+         2. BARRA DE NAVEGACIÓN SUPERIOR (NAVBAR)
+         sticky-top: fija la barra en el borde superior al desplazarse por la página
+         ============================================================================ -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container">
+            <!-- Logotipo y nombre de la tienda con enlace al catálogo principal -->
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="assets/img/logo.png" alt="Logo Play The Game Store" width="34" height="34"
+                    class="rounded object-fit-contain">
+                <span>Play The Game Store</span>
+            </a>
+
+            <!-- Botón hamburguesa desplegable para pantallas móviles -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                aria-controls="menuPrincipal" aria-expanded="false" aria-label="Alternar navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Enlaces de navegación (con "Quiénes Somos" marcado como página activa) -->
+            <div class="collapse navbar-collapse" id="menuPrincipal">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio y Catálogo</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="nosotros.html">Quiénes
+                            Somos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         3. ENCABEZADO DE LA SECCIÓN (HERO HEADER)
+         ========================================== -->
+    <header class="hero-header text-center">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-white">Quiénes Somos</h1>
+            <p class="lead text-info mb-0">Conectando comunidades gamers con tecnología web moderna en Quilpué</p>
+        </div>
+    </header>
+
+    <!-- ====================================
+         4. CONTENIDO PRINCIPAL DE LA PÁGINA
+         ==================================== -->
+    <main class="container my-5">
+
+        <!-- -------------------------------------------------------------------------------------------------
+             SECCIÓN A: HISTORIA Y PROPÓSITO DEL PROYECTO
+             custom-panel + hover-card: fondo oscuro con efecto de elevación y brillo cian al pasar el cursor
+             ------------------------------------------------------------------------------------------------- -->
+        <section class="custom-panel hover-card p-4 mb-4" aria-labelledby="titulo-historia">
+            <h2 id="titulo-historia" class="h4 text-info mb-3">Nuestra Historia</h2>
+            <p class="text-light opacity-75">
+                <strong>Play The Game Store</strong> nació en la Región de Valparaíso como una plataforma tecnológica
+                orientada a reunir en un solo catálogo digital lo mejor del ecosistema gamer: videojuegos, consolas de
+                última generación,
+                periféricos de alto rendimiento, suscripciones y gift cards digitales.
+                Nuestro propósito es brindar a jugadores, estudiantes y entusiastas del gaming un espacio rápido,
+                confiable y estructurado para explorar y gestionar productos gamer.
+            </p>
+            <p class="text-light opacity-75 mb-0">
+                Desarrollada bajo una arquitectura Full-Stack moderna con <strong>PostgreSQL</strong>,
+                <strong>Express</strong> y <strong>Bootstrap 5</strong>,
+                nuestra plataforma demuestra cómo la integración eficiente entre bases de datos relacionales e
+                interfaces responsivas mejora la experiencia de búsqueda y gestión de catálogos digitales.
+            </p>
+        </section>
+
+        <!-- -------------------------------------------------------------------------
+             SECCIÓN B: PILARES INSTITUCIONALES (MISIÓN, VISIÓN Y VALORES)
+             row g-4: grilla de 3 columnas iguales (col-md-4) con separación uniforme
+             ------------------------------------------------------------------------- -->
+        <section class="row g-4 mb-4" aria-label="Pilares institucionales">
+
+            <!-- Tarjeta 1: Misión -->
+            <article class="col-md-4">
+                <!-- h-100: asegura que las 3 tarjetas tengan exactamente la misma altura -->
+                <div class="custom-panel hover-card p-4 h-100">
+                    <h3 class="h5 text-info fw-bold mb-3">🎯 Misión</h3>
+                    <p class="text-light opacity-75 mb-0">
+                        Facilitar el descubrimiento, filtrado y gestión de videojuegos, consolas, periféricos y
+                        servicios digitales mediante una plataforma web ágil,
+                        respaldada por bases de datos relacionales robustas y estándares abiertos.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Tarjeta 2: Visión -->
+            <article class="col-md-4">
+                <div class="custom-panel hover-card p-4 h-100">
+                    <h3 class="h5 text-info fw-bold mb-3">🚀 Visión</h3>
+                    <p class="text-light opacity-75 mb-0">
+                        Consolidarnos como una tienda y catálogo digital de referencia para entusiastas del mundo gamer
+                        y el desarrollo de software en Chile.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Tarjeta 3: Valores -->
+            <article class="col-md-4">
+                <div class="custom-panel hover-card p-4 h-100">
+                    <h3 class="h5 text-info fw-bold mb-3">🛡️ Valores</h3>
+                    <ul class="text-light opacity-75 mb-0 ps-3">
+                        <li class="mb-1">Integridad y precisión en los datos.</li>
+                        <li class="mb-1">Código limpio y buenas prácticas de ingeniería.</li>
+                        <li>Diseño accesible, responsivo y centrado en el usuario.</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <!-- -------------------------------------------------------------------------------------------
+             SECCIÓN C: ARQUITECTURA TECNOLÓGICA (STACK FULL-STACK)
+             Grilla responsiva: 1 columna en móvil, 2 en tablet (col-sm-6) y 4 en escritorio (col-lg-3)
+             ------------------------------------------------------------------------------------------- -->
+        <section class="custom-panel hover-card p-4" aria-labelledby="titulo-tecnologia">
+            <h2 id="titulo-tecnologia" class="h4 text-info mb-3">Arquitectura Tecnológica</h2>
+            <div class="row g-3 text-center">
+                <div class="col-sm-6 col-lg-3">
+                    <!-- Tecnología 1: Base de datos -->
+                    <div class="p-3 border border-secondary rounded bg-dark bg-opacity-75 hover-card">
+                        <strong class="text-info d-block fs-5">PostgreSQL</strong>
+                        <small class="text-light opacity-75">Persistencia relacional y consultas INNER JOIN</small>
+                    </div>
+                </div>
+
+                <!-- Tecnología 2: Backend -->
+                <div class="col-sm-6 col-lg-3">
+                    <div class="p-3 border border-secondary rounded bg-dark bg-opacity-75 hover-card">
+                        <strong class="text-info d-block fs-5">Node.js + Express</strong>
+                        <small class="text-light opacity-75">API RESTful y servidor estático</small>
+                    </div>
+                </div>
+
+                <!-- Tecnología 3: Framework UI -->
+                <div class="col-sm-6 col-lg-3">
+                    <div class="p-3 border border-secondary rounded bg-dark bg-opacity-75 hover-card">
+                        <strong class="text-info d-block fs-5">Bootstrap 5.3</strong>
+                        <small class="text-light opacity-75">Diseño responsivo y componentes interactivos</small>
+                    </div>
+                </div>
+
+                <!-- Tecnología 4: Lógica del navegador (Frontend) -->
+                <div class="col-sm-6 col-lg-3">
+                    <div class="p-3 border border-secondary rounded bg-dark bg-opacity-75 hover-card">
+                        <strong class="text-info d-block fs-5">JavaScript ES6+</strong>
+                        <small class="text-light opacity-75">Consumo asíncrono Fetch API y filtrado dinámico</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===========================================================
+         5. PIE DE PÁGINA (FOOTER) CON CRÉDITOS Y DERECHOS DE AUTOR
+         =========================================================== -->
+    <footer class="container-fluid text-center position-relative overflow-hidden">
+
+        <!-- Capa delantera (z-index 2): Contenido textual sobre el video de fondo -->
+        <div class="footer-content position-relative z-2 container">
+            <p class="mb-1 small text-white fw-medium">Proyecto Digital Gamer</p>
+
+            <!-- Cláusula de Copyright institucional exigida por los términos de uso -->
+            <p class="mb-2 text-white-50 lh-sm spec-copyright">
+                &copy; 2026 Play The Game Store. Todos los derechos reservados.</p>
+
+            <!-- Créditos del desarrollador y stack tecnológico del proyecto -->
+            <p class="mb-1 text-white">Desarrollado por <strong class="text-info">José Muñoz León</strong></p>
+            <small class="text-light opacity-75">Arquitectura Full-Stack PostgreSQL + Express + Bootstrap 5</small>
+        </div>
+    </footer>
+
+    <!-- ==============================
+         6. SCRIPTS DE INTERACTIVIDAD
+         ============================== -->
+    <!-- Bootstrap 5.3.9 JS: activa el menú desplegable (navbar-toggler) en celulares -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.min.js"
+        integrity="sha384-89aa4glufciPv46aKltztWQEmk+Tu9W2RhzXr6VcnUUEub7F8+06RcL2RYLCOHUq"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
