@@ -47,7 +47,7 @@ async function cargarProductos() {
         // Guarda los datos recibidos en la variable global y limpia el mensaje de carga
         productos = await res.json();
         $('estado-carga').innerHTML = '';
-        
+
         // Actualiza también el menú desplegable de "Eliminar Producto" con los registros vigentes
         $('select-eliminar-producto').innerHTML = '<option value="">Selecciona un producto...</option>' +
             productos.map(p => `<option value="${p.producto_id}">ID #${p.producto_id} — ${p.nombre}</option>`).join('');
@@ -97,7 +97,7 @@ function filtrarYMostrar() {
         const imgRespaldo = crearImagenRespaldo(j.nombre, j.categoria);
 
         return `
-        <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <article class="col">
             <div class="card h-100 game-card text-white" style="cursor: pointer;" onclick="verDetalle(${j.producto_id})">
                 <!-- Imagen del juego con respaldo automático si falla el enlace -->
                 <img src="${j.imagen_url}" onerror="this.onerror=null; this.src='${imgRespaldo}';" class="card-img-top" alt="${j.nombre}">
@@ -105,7 +105,7 @@ function filtrarYMostrar() {
                 <!-- card-body: envuelve TODO el contenido de texto para dar márgenes internos uniformes -->
                 <div class="card-body d-flex flex-column">
                     <!-- Título a ancho completo y descripción -->
-                    <h3 class="h5 card-title fw-bold text-info mb-2">${j.nombre}</h3>
+                    <h3 class="h6 card-title fw-bold text-info mb-2">${j.nombre}</h3>
                     <p class="card-text small text-light opacity-75 mb-3">${j.descripcion}</p>
 
                     <!-- Categoría alineada a la derecha justo arriba de la línea divisoria -->
@@ -115,7 +115,7 @@ function filtrarYMostrar() {
                     
                     <!-- Pie de la tarjeta: Precio e ID -->
                     <div class="pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
-                        <span class="fw-bold">${precio}</span>
+                        <span class="fw-bold small">${precio}</span>
                         <small class="text-secondary">ID #${j.producto_id}</small>
                     </div>
                 </div>
@@ -217,7 +217,7 @@ $('form-nuevo-juego').addEventListener('submit', async (e) => {
 // ==================================================
 $('form-eliminar-juego').addEventListener('submit', async (e) => {
     e.preventDefault();  // Evita que el formulario recargue la página al enviarse
-    
+
     // Captura el ID del producto seleccionado y la contraseña ingresada
     const id = $('select-eliminar-producto').value;
     const password = $('input-password-eliminar').value;
@@ -248,7 +248,7 @@ $('form-eliminar-juego').addEventListener('submit', async (e) => {
         await cargarProductos();
         // Oculta la notificación de éxito automáticamente tras 3 segundos (3000 ms)
         setTimeout(() => $('alerta-eliminar').innerHTML = '', 3000);
-        } catch {
+    } catch {
         // Si falla la red o el servidor Express no responde, muestra una alerta de error de conexión
         $('alerta-eliminar').innerHTML = `<div class="alert alert-danger py-2 mb-0">Error de conexión con el servidor.</div>`;
         setTimeout(() => $('alerta-eliminar').innerHTML = '', 3000); // Desaparece tras 3 segundos

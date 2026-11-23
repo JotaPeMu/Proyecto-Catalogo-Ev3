@@ -97,7 +97,6 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.1);               /* Borde blanco muy sutil */
     border-radius: 10px;                                        /* Esquinas redondeadas */
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; /* Animación fluida */
-    
 }
 
 /* Efecto de elevación y brillo cian al pasar el cursor sobre tarjetas */
@@ -116,6 +115,12 @@ footer {
     background-color: #161b22;                                /* Fondo oscuro uniforme para los espacios laterales */
     padding: 2px;                                               /* Deja un margen interno para que la foto no toque los bordes */
     border-radius: 9px 9px 0 0;                                 /* Redondea solo las esquinas superiores */
+}
+
+.grid-catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1rem;
 }
 
 
@@ -161,7 +166,7 @@ footer {
     overflow: hidden;                                           /* Oculta cualquier parte del video que sobresalga */
     background-color: #0a0a0a;                                /* Fondo negro mientras carga el video */
     border-bottom: 2px solid #0dcaf0;                         /* Borde inferior cian */
-    padding: 4rem 0;                                            /* Altura del banner principal */
+    padding: 2.2rem 0;                                            /* Altura del banner principal */
 }
 
 /* Ajusta el video al 100% del contenedor y lo oscurece para leer mejor el texto */
@@ -182,6 +187,19 @@ footer {
     z-index: 2;                                                 /* Capa superior por delante del video */
 }
 
+/* Contenedor del pie de página con video de fondo */
+.footer-video-container {
+    padding: 2.5rem 0;                                          /* Da aire vertical para lucir el video */
+}
+
+/* Estilo discreto y centrado para el texto legal del footer */
+.spec-copyright {
+    font-size: 0.8rem;                                          /* Letra pequeña para cláusulas legales */
+    max-width: 750px;                                           /* Evita líneas demasiado largas en pantallas anchas */
+    margin-left: auto;                                          /* Centra el bloque horizontalmente */
+    margin-right: auto;
+}
+
 /* Video fijo a pantalla completa detrás de todo el contenido (Nosotros y Contacto) */
 .page-video-bg {
     position: fixed;                                            /* Fijo en la ventana incluso al hacer scroll */
@@ -198,6 +216,7 @@ footer {
 body.has-full-video {
 background-color: transparent !important;                       /* Quita el fondo negro sólido */
 }
+
 /* Efecto vidrio esmerilado suave para el encabezado y footer sobre video */
 body.has-full-video .hero-header,
 body.has-full-video footer {
