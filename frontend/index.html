@@ -90,7 +90,7 @@
                 <form id="form-nuevo-juego" class="row g-3">
                     <!-- Campo: Nombre del producto -->
                     <div class="col-md-4">
-                        <label for="input-nombre" class="form-label">Nombre del juego *</label>
+                        <label for="input-nombre" class="form-label">Nombre del producto *</label>
                         <input type="text" id="input-nombre" class="form-control form-control-dark"
                             placeholder="Ej: Cyberpunk 2077" required>
                     </div>
@@ -173,8 +173,8 @@
         </section>
 
         <!-- ---------------------------------------------------------------------------------
-             SECCIÓN B: BARRA DE BÚSQUEDA Y FILTRADO EN TIEMPO REAL
-             custom-panel: aplica el fondo oscuro y bordes redondeados definidos en style.css
+             SECCIÓN B: BARRA DE BÚSQUEDA, FILTRADO Y ORDENAMIENTO EN TIEMPO REAL
+             Grilla de 12 columnas: 4 + 3 + 3 + 2 = 12 (todo alineado en una sola fila)
              --------------------------------------------------------------------------------- -->
         <section class="custom-panel p-4 mb-4" aria-labelledby="titulo-filtros">
             <h2 id="titulo-filtros" class="h5 text-info mb-3">Filtrar Catálogo</h2>
@@ -182,24 +182,35 @@
             <!-- Fila de Bootstrap alineada en la parte inferior (align-items-end) para nivelar inputs y botón -->
             <div class="row g-3 align-items-end">
 
-                <!-- Buscador de texto: filtra tarjetas por coincidencia de nombre mientras escribes -->
-                <div class="col-md-5">
+                <!-- Buscador de texto: Filtra tarjetas por coincidencia de nombre mientras escribes -->
+                <div class="col-md-4">
                     <label for="filtro-nombre" class="form-label">Buscar por nombre</label>
                     <input type="text" id="filtro-nombre" class="form-control form-control-dark"
                         placeholder="Escribe el nombre de un juego...">
                 </div>
 
-                <!-- Selector de categoría: filtra productos por tipo (llenado dinámicamente por script.js) -->
-                <div class="col-md-4">
+                <!-- Selector de categoría: Filtra productos por tipo (llenado dinámicamente por script.js) -->
+                <div class="col-md-3">
                     <label for="filtro-categoria" class="form-label">Filtrar por categoría</label>
                     <select id="filtro-categoria" class="form-select form-select-dark">
                         <option value="all">Todas las categorías</option>
                     </select>
                 </div>
 
-                <!-- Botón para restablecer el buscador y mostrar nuevamente todos los productos -->
+                <!-- Selector de ordenamiento: Ordena resultados por precio o alfabéticamente -->
                 <div class="col-md-3">
-                    <button type="button" id="btn-limpiar" class="btn btn-outline-info w-100">Limpiar filtros</button>
+                    <label for="orden-productos" class="form-label">Ordenar por</label>
+                    <select id="orden-productos" class="form-select form-select-dark">
+                        <option value="recientes">Más recientes</option>
+                        <option value="precio-asc">Precio: Menor a Mayor</option>
+                        <option value="precio-desc">Precio: Mayor a Menor</option>
+                        <option value="nombre-asc">Nombre: A - Z</option>
+                    </select>
+                </div>
+
+                <!-- Botón para restablecer los filtros y mostrar nuevamente todos los productos -->
+                <div class="col-md-2">
+                    <button type="button" id="btn-limpiar" class="btn btn-outline-info w-100">Limpiar</button>
                 </div>
             </div>
         </section>
@@ -225,7 +236,43 @@
     </main>
 
     <!-- =================================================================
-         4. PIE DE PÁGINA (FOOTER) CON VIDEO DE FONDO E INFORMACIÓN LEGAL
+         4. MODAL DE DETALLE DEL PRODUCTO (VENTANA EMERGENTE BOOTSTRAP 5)
+         Se abre al hacer clic sobre cualquier tarjeta del catálogo
+         ================================================================= -->
+    <div class="modal fade" id="modalDetalleProducto" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-info">
+                <!-- Cabecera del modal con el título del juego y botón cerrar -->
+                <div class="modal-header border-secondary">
+                    <h3 class="modal-title h5 text-info fw-bold" id="modalTitulo">Nombre del Producto</h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <!-- Cuerpo del modal: imagen ampliada, categoría, descripción completa y precio -->
+                <div class="modal-body">
+                    <img id="modalImagen" src="" alt="" class="img-fluid rounded mb-3 w-100 bg-black"
+                        style="max-height: 280px; object-fit: contain;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span id="modalCategoria" class="badge bg-info text-dark">Categoría</span>
+                        <small id="modalId" class="text-secondary">ID #0</small>
+                    </div>
+                    <p id="modalDescripcion" class="text-light opacity-75 mb-3"></p>
+                    <div class="p-3 rounded bg-black bg-opacity-50 border border-secondary d-flex justify-content-between align-items-center">
+                        <span class="text-light">Precio Digital:</span>
+                        <span id="modalPrecio" class="fs-4 fw-bold text-info">$0 CLP</span>
+                    </div>
+                </div>
+
+                <!-- Pie del modal -->
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-info btn-sm" data-bs-dismiss="modal">Cerrar ventana</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================
+         5. PIE DE PÁGINA (FOOTER) CON VIDEO DE FONDO E INFORMACIÓN LEGAL
          ================================================================= -->
     <footer class="container-fluid text-center position-relative overflow-hidden footer-video-container">
 
@@ -252,17 +299,18 @@
     </footer>
 
     <!-- ===================================================
-         5. ARCHIVOS JAVASCRIPT (ORDEN DE CARGA IMPORTANTE)
+         6. ARCHIVOS JAVASCRIPT (ORDEN DE CARGA IMPORTANTE)
          =================================================== -->
-    <!-- 1. Popper.js: requerido por Bootstrap para posicionar menús desplegables y tooltips -->
+    <!-- 1. Popper.js: librería auxiliar que calcula las coordenadas exactas en pantalla
+            para posicionar elementos flotantes y evitar que se corten en los bordes -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
 
-    <!-- 2. Nuestro script principal: conecta con la API REST, maneja eventos y dibuja las tarjetas -->    
+    <!-- 2. Script principal: conecta con la API REST, maneja eventos y dibuja las tarjetas -->    
     <script src="assets/js/script.js"></script>
 
-    <!-- 3. Bootstrap JS: activa componentes interactivos como el menú móvil (navbar-toggler) y el colapso (collapse) -->
+    <!-- 3. Bootstrap JS: activa componentes interactivos como el menú móvil (navbar-toggler), el Modal y el colapso (collapse) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.min.js"
         integrity="sha384-89aa4glufciPv46aKltztWQEmk+Tu9W2RhzXr6VcnUUEub7F8+06RcL2RYLCOHUq"
         crossorigin="anonymous"></script>

@@ -73,6 +73,12 @@ function filtrarYMostrar() {
         j.nombre.toLowerCase().includes(texto) && (cat === 'all' || j.categoria === cat)
     );
 
+    // Ordena una copia de los resultados según la opción elegida
+    const orden = $('orden-productos').value;
+    if (orden === 'precio-asc') filtrados.sort((a, b) => Number(a.precio) - Number(b.precio));
+    if (orden === 'precio-desc') filtrados.sort((a, b) => Number(b.precio) - Number(a.precio));
+    if (orden === 'nombre-asc') filtrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
     // Actualiza la insignia con la cantidad de resultados encontrados
     $('contador-resultados').textContent = `${filtrados.length} resultado(s)`;
 
@@ -92,7 +98,7 @@ function filtrarYMostrar() {
 
         return `
         <article class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="card h-100 game-card text-white">
+            <div class="card h-100 game-card text-white" style="cursor: pointer;" onclick="verDetalle(${j.producto_id})">
                 <!-- Imagen del juego con respaldo automático si falla el enlace -->
                 <img src="${j.imagen_url}" onerror="this.onerror=null; this.src='${imgRespaldo}';" class="card-img-top" alt="${j.nombre}">
                 
@@ -116,6 +122,34 @@ function filtrarYMostrar() {
             </div>
         </article>`;
     }).join('');
+}
+
+// =======================================================
+// 3.1 ABRIR MODAL CON EL DETALLE COMPLETO DEL PRODUCTO
+// =======================================================
+function verDetalle(id) {
+    // Busca el producto seleccionado dentro del arreglo en memoria
+    const juego = productos.find(p => p.producto_id === id);
+    if (!juego) return;
+
+    const precio = Number(juego.precio) === 0 ? 'Gratis' : `$${Number(juego.precio).toLocaleString('es-CL')} CLP`;
+    const imgRespaldo = crearImagenRespaldo(juego.nombre, juego.categoria);
+
+    // Rellena los elementos del modal con los datos del producto
+    $('modalTitulo').textContent = juego.nombre;
+    $('modalCategoria').textContent = juego.categoria;
+    $('modalId').textContent = `ID #${juego.producto_id}`;
+    $('modalDescripcion').textContent = juego.descripcion;
+    $('modalPrecio').textContent = precio;
+
+    const img = $('modalImagen');
+    img.src = juego.imagen_url;
+    img.alt = juego.nombre;
+    img.onerror = () => { img.onerror = null; img.src = imgRespaldo; };
+
+    // Abre la ventana emergente usando la API JavaScript de Bootstrap 5
+    const modal = new bootstrap.Modal($('modalDetalleProducto'));
+    modal.show();
 }
 
 // =====================================================
@@ -229,11 +263,14 @@ $('form-eliminar-juego').addEventListener('submit', async (e) => {
 // Ejecuta filtrarYMostrar() en tiempo real cada vez que el usuario escribe o cambia la categoría
 $('filtro-nombre').addEventListener('input', filtrarYMostrar);
 $('filtro-categoria').addEventListener('change', filtrarYMostrar);
+$('orden-productos').addEventListener('change', filtrarYMostrar);
+
 
 // Botón para restablecer los controles de búsqueda y vuelve a mostrar todos los productos registrados
 $('btn-limpiar').addEventListener('click', () => {
     $('filtro-nombre').value = '';
     $('filtro-categoria').value = 'all';
+    $('order-productos').value = 'recientes';
     filtrarYMostrar();
 });
 
